@@ -15,4 +15,11 @@ int check_win(int pacman_y, int pacman_x, int ghosts_y[NUM_GHOSTS], int ghosts_x
 int check_loss(int pacman_y, int pacman_x, int ghosts_y[NUM_GHOSTS], int ghosts_x[NUM_GHOSTS]) {
     return KEEP_GOING;
 }
+int get1DCoord (int x, int y, int mapWidth){
+    return (y*mapWidth)+x;
+}
+
+
+
+
 

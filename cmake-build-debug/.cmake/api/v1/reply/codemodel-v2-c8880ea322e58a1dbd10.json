@@ -9,13 +9,14 @@
 					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "3.27"
+						"string" : "3.26"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -27,10 +28,11 @@
 					[
 						0
 					],
-					"name" : "FinalProject",
+					"name" : "project",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -38,9 +40,16 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "APSC-142-Final-Project::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-APSC-142-Final-Project-Debug-c834fc9257ecc69c7364.json",
-					"name" : "APSC-142-Final-Project",
+					"id" : "project::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-project-Debug-54818cdaa49c19da4451.json",
+					"name" : "project",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "tests::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-tests-Debug-6e4f869db3697f435270.json",
+					"name" : "tests",
 					"projectIndex" : 0
 				}
 			]

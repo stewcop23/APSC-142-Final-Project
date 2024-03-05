@@ -1,3 +1,4 @@
-C:/Users/stewc/OneDrive/Documents/GitHub/APSC-142-Final-Project/APSC-142-Final-Project/cmake-build-debug/CMakeFiles/APSC-142-Final-Project.dir
+C:/Users/stewc/OneDrive/Documents/GitHub/APSC-142-Final-Project/APSC-142-Final-Project/cmake-build-debug/CMakeFiles/project.dir
+C:/Users/stewc/OneDrive/Documents/GitHub/APSC-142-Final-Project/APSC-142-Final-Project/cmake-build-debug/CMakeFiles/tests.dir
 C:/Users/stewc/OneDrive/Documents/GitHub/APSC-142-Final-Project/APSC-142-Final-Project/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/Users/stewc/OneDrive/Documents/GitHub/APSC-142-Final-Project/APSC-142-Final-Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
