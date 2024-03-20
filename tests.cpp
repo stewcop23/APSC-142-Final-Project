@@ -38,10 +38,27 @@ TEST_SUITE_BEGIN("Map tests");
 // tests for load_map
 TEST_CASE("A test for load_map") {
     setup();
-    CHECK(0 == 0);
+    map = load_map("map.txt", &width, &height);
+    for (int i = 0; i < width * height; i++) {
+        printf("%c", map[i]);
+    }
+    CHECK(width == 9);
+    CHECK(height == 9);
     teardown();
 }
 
+TEST_CASE("testing print_map") {
+
+    char *map = (char *) malloc(3 * 4 * sizeof(char));
+    char tempMap[12] = {'.', 'P', '.', '.', 'W', ' ', 'W', 'W', 'G', '.', '.', 'G'};
+    for (int i = 0; i < 12; i++) {
+        map[i] = tempMap[i];
+    }
+    width = 4;
+    height = 3;
+
+    print_map(map, &height, &width);
+}
 // tests for is_wall
 
 // tests for move_actor

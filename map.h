@@ -42,6 +42,10 @@
  */
 char * load_map(char * filename, int * map_height, int *map_width);
 
+char* load_dots(char* map);
+
+char * print_map(char* map, int* map_height,int* map_width);
+
 #define NOT_WALL 0
 #define YES_WALL 1
 /**
