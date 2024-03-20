@@ -69,34 +69,7 @@ char * load_map(char *filename, int *map_height, int *map_width) {
             }
             }
         }
-
-
-
-//        char currentChar = getc(pFile);
-//        if (currentChar != NULL){
-//            if (currentChar =='\n'){
-//                *map_width = width;
-//                width = 0;
-//                height++;
-//                continue;
-//            }
-//            if (currentChar == EOF){
-//                *map_height = ++height;
-//                return map;
-//            }
-//            width++;
-//            *(map+map_size) = currentChar;
-//            char* tempMap = (char*) realloc(map,++map_size*sizeof(char));
-//            if (tempMap != NULL){
-//                map = tempMap;
-//                tempMap = NULL;
-//                free(tempMap);
-//            }else{
-//                return NULL;
-//            }
-//        }
-
-
+        
     }
 
 
