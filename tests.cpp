@@ -49,26 +49,136 @@ TEST_CASE("A test for load_map") {
 
 TEST_CASE("testing print_map") {
 
-    char *map = (char *) malloc(3 * 4 * sizeof(char));
+    char *testMap = (char *) malloc(3 * 4 * sizeof(char));
     char tempMap[12] = {'.', 'P', '.', '.', 'W', ' ', 'W', 'W', 'G', '.', '.', 'G'};
     for (int i = 0; i < 12; i++) {
-        map[i] = tempMap[i];
+        testMap[i] = tempMap[i];
     }
-    width = 4;
-    height = 3;
+    int testWidth = 4;
+    int testHeight = 3;
 
-    print_map(map, &height, &width);
+    print_map(testMap, &testHeight, &testWidth);
 }
-// tests for is_wall
 
-// tests for move_actor
+TEST_CASE("Testing is_wall"){
+    //Identify it is a wall
+    CHECK(is_wall(0, 4));
+    CHECK(is_wall(1, 1));
+    CHECK(is_wall(8, 4));
+
+    //Identify it isn't a wall
+    CHECK(!is_wall(0, 0));
+    CHECK(!is_wall(3, 6));
+}
+
+TEST_CASE("Testing move_actor"){
+    int ghostX;
+    int ghostY;
+
+    ghostX = 0;
+    ghostY = 1;
+
+    //move up correctly
+    move_actor(&ghostY, &ghostX, UP, REPLACE_DOTS);
+    CHECK(ghostX == 0);
+    CHECK(ghostY == 0);
+
+    ghostX = 0;
+    ghostY = 0;
+
+    //move down correctly
+    move_actor(&ghostY, &ghostX, DOWN, REPLACE_DOTS);
+    CHECK(ghostX == 0);
+    CHECK(ghostY == 1);
+
+    ghostX = 3;
+    ghostY = 2;
+
+    //move left correctly
+    move_actor(&ghostY, &ghostX, LEFT, REPLACE_DOTS);
+    CHECK(ghostX == 2);
+    CHECK(ghostY == 2);
+
+    ghostX = 2;
+    ghostY = 2;
+
+    //move right correctly
+    move_actor(&ghostY, &ghostX, RIGHT, REPLACE_DOTS);
+    CHECK(ghostX == 3);
+    CHECK(ghostY == 2);
+
+    ghostX = 0;
+    ghostY = 0;
+
+    //try to move into upper wall
+    move_actor(&ghostY, &ghostX, UP, REPLACE_DOTS);
+    CHECK(ghostX == 0);
+    CHECK(ghostY == 0);
+
+    ghostX = 2;
+    ghostY = 6;
+
+    //try to move into lower wall
+    move_actor(&ghostY, &ghostX, DOWN, REPLACE_DOTS);
+    CHECK(ghostX == 2);
+    CHECK(ghostY == 6);
+
+    ghostX = 2;
+    ghostY = 6;
+
+    //try to move into left wall
+    move_actor(&ghostY, &ghostX, LEFT, REPLACE_DOTS);
+    CHECK(ghostX == 2);
+    CHECK(ghostY == 6);
+
+    ghostX = 8;
+    ghostY = 8;
+
+    //try to move into right wall
+    move_actor(&ghostY, &ghostX, RIGHT, REPLACE_DOTS);
+    CHECK(ghostX == 8);
+    CHECK(ghostY == 8);
+
+    //DOT TESTING STILL NEEDS TO BE WRITTEN
+    //dot_map code is not written, so i don't know how it should be tested lol
+}
 
 TEST_SUITE_END();
 
 /* tests for ghost.c */
 TEST_SUITE_BEGIN("Ghost tests");
 
-// tests for sees_pacman
+TEST_CASE("Testing sees_pacman to the right"){
+    //check that it sees to the right
+    CHECK(sees_pacman(2, 6, 2, 2) == RIGHT);
+
+    //check that it notices walls to the right
+    CHECK(sees_pacman(2, 6, 2, 0) == SEES_NOTHING);
+}
+
+TEST_CASE("Testing sees_pacman to the left"){
+    //check that it sees to the left
+    CHECK(sees_pacman(2, 2, 2, 6) == LEFT);
+
+    //check that it notices walls to the right
+    CHECK(sees_pacman(2, 2, 2, 8) == SEES_NOTHING);
+}
+
+TEST_CASE("Testing sees_pacman up"){
+    //check that it sees above it
+    CHECK(sees_pacman(2, 2, 4, 2) == UP);
+
+    //check that it notices walls above it
+    CHECK(sees_pacman(4, 4, 6, 4) == SEES_NOTHING);
+}
+
+TEST_CASE("Testing sees_pacman down"){
+    //check that it sees below it
+    CHECK(sees_pacman(4, 2, 2, 2) == DOWN);
+
+    //check that it notices walls below it
+    CHECK(sees_pacman(6, 4, 4, 4) == SEES_NOTHING);
+}
 
 TEST_SUITE_END();
 

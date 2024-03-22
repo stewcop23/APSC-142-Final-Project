@@ -12,10 +12,85 @@ extern char *map, *dot_map;
 extern int width, height;
 
 int move_actor(int * y, int * x, char direction, int eat_dots) {
+    int changeInX = 0;
+    int changeInY = 0;
+
+    switch (direction){
+        case UP:
+            //check if there is a wall above it
+            if(is_wall(*y - 1, *x)){
+                return MOVED_WALL;
+            }
+
+            changeInY = -1;
+            break;
+        case DOWN:
+            //check if there is a wall below it
+            if(is_wall(*y + 1, *x)){
+                return MOVED_WALL;
+            }
+
+            changeInY = 1;
+            break;
+        case LEFT:
+            //check if there is a wall to the left of it
+            if(is_wall(*y, *x -1)){
+                return MOVED_WALL;
+            }
+
+            changeInX = -1;
+            break;
+        case RIGHT:
+            //check if there is a wall to the right of it
+            if(is_wall(*y, *x + 1)){
+                return MOVED_WALL;
+            }
+
+            changeInX = 1;
+            break;
+        default:
+            return MOVED_INVALID_DIRECTION;
+    }
+
+    /*
+     * This is from map.h, and I'm not 100% sure what it means.
+     * Specifically, I don't understand: "the global map should be updated
+     * at the passed coordinates, but not at the new coordinates"
+     *
+     * Full section I'm referencing:
+     * "The function also takes a parameter to either update the global map
+     * with dots from the global dot_map (REPLACE_DOTS) or not (EAT_DOTS),
+     * in which case the vacated coordinates should be replaced by EMPTY.
+     * In either case, the global map should be updated at the passed
+     * coordinates, but not at the new coordinates, if moving was successful."
+     *
+     * So the order of this area of the function might have to be changed? Not sure
+     */
+
+    //replace actor with dot or EMPTY
+    if (eat_dots){
+        /*
+         * replace with EMPTY - dot_map has not been coded
+         */
+    }
+    else{
+        /*
+         * replace with dot - dot_map has not been coded
+         */
+    }
+
+    //update actor location
+    *y += changeInY;
+    *x += changeInX;
+
     return MOVED_OKAY;
 }
 
 int is_wall(int y, int x) {
+    if(map[(y*width) +x] == 'W' || y < 0 || x < 0 || y >= width || x >= width){
+        return YES_WALL;
+    }
+
     return NOT_WALL;
 }
 
@@ -66,7 +141,7 @@ char * load_map(char *filename, int *map_height, int *map_width) {
                     free(tempMap);
                 }else{
                     return NULL;
-            }
+                }
             }
         }
 
