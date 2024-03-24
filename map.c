@@ -113,7 +113,22 @@ char * load_map(char *filename, int *map_height, int *map_width) {
 
         // check that it actually read something
         if (currentChar != NULL){
-            // check if it is a new line character
+            width++;
+            *(map + map_size) = currentChar;// map should already have 1 empty index, this is where the latest char is placed
+
+            // dynamically reallocate memory.
+            char* tempMap = realloc(map,(++map_size+1)*sizeof(char)); //map size needs to be incremented, and the +1 is because we want the new array to be larger than the map size to accommodate the next char.
+
+            if (tempMap != NULL){//if memory is allocated properly...
+                //swap the tempMap and Map variables
+                map = tempMap;
+                //free tempMap to avoid memory leaks
+                tempMap = NULL;
+                free(tempMap);
+            }else{
+                return NULL;
+            }
+            currentChar = getc(pFile);// we're allowed to assume 2 spaces after every character, unless the next character is a new line or the end of the file
             if(currentChar == '\n'){
                 *map_width = width; // update the map width storage variable
                 width = 0; // reset the map width tracker variable
@@ -124,27 +139,9 @@ char * load_map(char *filename, int *map_height, int *map_width) {
                 *map_height = map_size / (*map_width);
                 return map;
             }
-
-
-            if (currentChar != ' ') {// ignore the char if it's a space
-                width++;
-                *(map + map_size) = currentChar;// map should already have 1 empty index, this is where the latest char is placed
-
-                // dynamically reallocate memory.
-                char* tempMap = realloc(map,(++map_size+1)*sizeof(char)); //map size needs to be incremented, and the +1 is because we want the new array to be larger than the map size to accommodate the next char.
-
-                if (tempMap != NULL){//if memory is allocated properly...
-                    //swap the tempMap and Map variables
-                    map = tempMap;
-                    //free tempMap to avoid memory leaks
-                    tempMap = NULL;
-                    free(tempMap);
-                }else{
-                    return NULL;
-                }
-            }
+            getc(pFile);//this will always ignore the second space
         }
-        
+
     }
 
 
