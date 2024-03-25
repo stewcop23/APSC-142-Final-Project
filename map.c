@@ -52,20 +52,7 @@ int move_actor(int * y, int * x, char direction, int eat_dots) {
             return MOVED_INVALID_DIRECTION;
     }
 
-    /*
-     * This is from map.h, and I'm not 100% sure what it means.
-     * Specifically, I don't understand: "the global map should be updated
-     * at the passed coordinates, but not at the new coordinates"
-     *
-     * Full section I'm referencing:
-     * "The function also takes a parameter to either update the global map
-     * with dots from the global dot_map (REPLACE_DOTS) or not (EAT_DOTS),
-     * in which case the vacated coordinates should be replaced by EMPTY.
-     * In either case, the global map should be updated at the passed
-     * coordinates, but not at the new coordinates, if moving was successful."
-     *
-     * So the order of this area of the function might have to be changed? Not sure
-     */
+
 
     //replace actor with dot or EMPTY
     int startingX = *x;
@@ -75,20 +62,11 @@ int move_actor(int * y, int * x, char direction, int eat_dots) {
     *x += changeInX;
 
     map[*y*width+*x] = map[startingY * width+startingX];//symbol at the new position gets replaced by the symbol at the previous position
+    map[startingY * width+startingX] = dot_map[startingY * width+startingX];//replace the starting point with whatever the dot map has there
 
 
     if (eat_dots){
-        /*
-         * replace with EMPTY - dot_map has not been coded
-         */
-        map[startingY * width+startingX] = EMPTY;
         dot_map[*y*width+*x] = EMPTY;//either that index is already empty or it now is
-    }
-    else{
-        /*
-         * replace with dot - dot_map has not been coded
-         */
-        map[startingY * width+startingX] = dot_map[startingY * width+startingX];
     }
 
 
