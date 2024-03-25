@@ -42,9 +42,14 @@ TEST_SUITE_BEGIN("Map tests");
 // tests for load_map
 TEST_CASE("A test for load_map") {
     setup();
-    for (int i = 0; i < width * height; i++) {
-        printf("%c", map[i]);
-    }
+
+    //Confirm all types of values are read correctly
+    CHECK(map[0]==GHOST);
+    CHECK(map[1]==DOT);
+    CHECK(map[4]==WALL);
+    CHECK(map[4*width+4]==PACMAN);
+
+    //confirm width and height are set properly
     CHECK(width == 9);
     CHECK(height == 9);
 
