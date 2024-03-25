@@ -241,10 +241,22 @@ TEST_CASE("Testing sees_pacman down"){
 TEST_SUITE_END();
 
 /* tests for game.c */
-//TEST_SUITE_BEGIN("Game tests");
+TEST_SUITE_BEGIN("Game tests");
 
 // tests for check_win
+TEST_CASE("Testing check_win"){
+    setup();
+    //check that the game starts unbeaten
+    CHECK(check_win()==KEEP_GOING);
 
+    //set all dots to EMPTY to check that the game is win-able
+    for(int i = 0; i<width*height;i++){
+        dot_map[i]=EMPTY;
+    }
+    CHECK(check_win()==YOU_WIN);
+
+    teardown();
+}
 // test for check_loss
 
-//TEST_SUITE_END();
+TEST_SUITE_END();
