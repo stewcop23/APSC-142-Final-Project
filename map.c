@@ -68,26 +68,36 @@ int move_actor(int * y, int * x, char direction, int eat_dots) {
      */
 
     //replace actor with dot or EMPTY
+    int startingX = *x;
+    int startingY = *y;
+    //update actor location
+    *y += changeInY;
+    *x += changeInX;
+
+    map[*y*width+*x] = map[startingY * width+startingX];//symbol at the new position gets replaced by the symbol at the previous position
+
+
     if (eat_dots){
         /*
          * replace with EMPTY - dot_map has not been coded
          */
+        map[startingY * width+startingX] = EMPTY;
+        dot_map[*y*width+*x] = EMPTY;//either that index is already empty or it now is
     }
     else{
         /*
          * replace with dot - dot_map has not been coded
          */
+        map[startingY * width+startingX] = dot_map[startingY * width+startingX];
     }
 
-    //update actor location
-    *y += changeInY;
-    *x += changeInX;
+
 
     return MOVED_OKAY;
 }
 
 int is_wall(int y, int x) {
-    if(map[(y*width) +x] == 'W' || y < 0 || x < 0 || y >= width || x >= width){
+    if(map[(y*width) +x] == WALL || y < 0 || x < 0 || y >= width || x >= width){
         return YES_WALL;
     }
 
@@ -139,7 +149,7 @@ char * load_map(char *filename, int *map_height, int *map_width) {
                 *map_height = map_size / (*map_width);
                 return map;
             }
-            getc(pFile);//this will always ignore the second space
+            getc(pFile);//this will always ignore the second space (if the previous character wasn't a newline or EOF, this will always be a space)
         }
 
     }
@@ -174,3 +184,13 @@ char * print_map(char* map, int* map_height,int* map_width){
 
     return NULL;
 }
+
+char* load_dots(char* mainMap,int* map_height,int* map_width){
+    int mapSize = *map_width * *map_height;
+    char* dotMap = (char*) malloc(mapSize*sizeof(char));
+    for(int i = 0; i< mapSize; i++){
+        dotMap[i] = ((mainMap[i]==DOT))?DOT:EMPTY;
+    }
+    return dotMap;
+}
+

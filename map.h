@@ -42,7 +42,7 @@
  */
 char * load_map(char * filename, int * map_height, int *map_width);
 
-char* load_dots(char* map);
+char* load_dots(char* mainMap,int* map_height,int* map_width);
 
 char * print_map(char* map, int* map_height,int* map_width);
 
