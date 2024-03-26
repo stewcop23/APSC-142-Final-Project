@@ -40,6 +40,30 @@ int width, height;
  */
 int main(void) {
     setbuf(stdout, NULL);
+    /**
+     * TO DO
+     * check to confirm map is loaded properly before load dots and other map related functions
+     */
+
+    /**
+     * Setup:
+     * load map (Y)
+     * load dots (Y)
+     * get ghost locations (Y)
+     * get pacman locations
+     */
+
+
+
+    /**
+     * Game loop:
+     * take direction input from player
+     * move player that direction (if possible) (Y)
+     * for each ghost, pick a random direction and try to move that way
+     * check for loss (Y)
+     * check for win (Y)
+     * repeat
+     */
 
     return NO_ERROR;
 }

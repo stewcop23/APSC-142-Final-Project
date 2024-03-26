@@ -15,7 +15,7 @@
  * then it should return KEEP_GOING.  The function can assume
  * that the global map and width/height are valid.
  */
-int check_win();
+int check_win(void);
 
 #define YOU_LOSE 1
 /**
@@ -38,16 +38,5 @@ int check_loss(int pacman_y, int pacman_x, int ghosts_y[NUM_GHOSTS], int ghosts_
 
 /** Other function prototypes can go below here **/
 
-/**
- * Takes in x and y coordinates, and a width and converts to a 1D index
- *
- * using the formula [y*width] + x = index
- *
- * @param x x coordinate
- * @param y y coordinate
- * @param width the width of the map, or whatever your converting the coordinates of
- * @returns int
- */
-int get1DCoord (int x, int y, int width);
 
 #endif //PROJECT_GAME_H

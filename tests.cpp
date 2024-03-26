@@ -25,7 +25,7 @@ int width, height;
  */
 
 void setup() {
-    map = load_map("map.txt", &width, &height);
+    map = load_map(MAP_NAME, &width, &height);
     dot_map = load_dots(map,&width, &height);
 }
 
@@ -193,6 +193,24 @@ TEST_CASE("Testing move_actor"){
     teardown();
 }
 
+TEST_CASE("Testing get_ghosts"){
+    setup();
+    int ghostsx[NUM_GHOSTS];
+    int ghostsy[NUM_GHOSTS];
+
+    get_ghosts(map,width,height,ghostsx,ghostsy);
+
+    CHECK(ghostsx[0]==0);
+    CHECK(ghostsy[0]==0);
+
+    CHECK(ghostsx[1]==8);
+    CHECK(ghostsy[1]==8);
+
+    teardown();
+}
+
+
+
 TEST_SUITE_END();
 
 /* tests for ghost.c */
@@ -254,6 +272,25 @@ TEST_CASE("Testing check_win"){
         dot_map[i]=EMPTY;
     }
     CHECK(check_win()==YOU_WIN);
+
+    teardown();
+}
+
+TEST_CASE("Testing check_loss"){
+    setup();
+
+    int pacman_x = 0;
+    int pacman_y = 0;
+
+    //ghosts not touching pacman
+    int ghost_x[NUM_GHOSTS] = {1,0};
+    int ghost_y[NUM_GHOSTS] = {0,1};
+    CHECK(check_loss(pacman_y,pacman_x,ghost_y,ghost_x)==KEEP_GOING);
+
+// now the first ghost is on top of pacman
+    ghost_x[0] = 0;
+    ghost_y[0] = 0;
+    CHECK(check_loss(pacman_y,pacman_x,ghost_y,ghost_x)==YOU_LOSE);
 
     teardown();
 }
