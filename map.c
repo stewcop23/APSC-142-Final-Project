@@ -172,3 +172,16 @@ char* load_dots(char* mainMap,int* map_height,int* map_width){
     return dotMap;
 }
 
+int get_ghosts(char* map,int width, int height, int ghosts_x[NUM_GHOSTS],int ghosts_y[NUM_GHOSTS]){
+    int ghostsFound =0;
+    for(int i = 0; i< width*height;i++){
+        if(map[i]==GHOST){
+            int x = i%width;
+            int y = (i-x)/width;
+            ghosts_x[ghostsFound] = x;
+            ghosts_y[ghostsFound] = y;
+            ghostsFound++;
+        }
+    }
+
+}

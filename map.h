@@ -99,5 +99,7 @@ int move_actor(int * y, int * x, char direction, int eat_dots);
 
 /** Other function prototypes can go below here **/
 
+int get_ghosts(char* map,int width, int height, int ghosts_x[NUM_GHOSTS],int ghosts_y[NUM_GHOSTS]);
+
 
 #endif //PROJECT_MAP_H
