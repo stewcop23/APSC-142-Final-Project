@@ -101,5 +101,7 @@ int move_actor(int * y, int * x, char direction, int eat_dots);
 
 int get_ghosts(char* map,int width, int height, int ghosts_x[NUM_GHOSTS],int ghosts_y[NUM_GHOSTS]);
 
+int get_pacman(char* map,int width, int height,int* pacman_x, int*pacman_y);
+
 
 #endif //PROJECT_MAP_H

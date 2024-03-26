@@ -209,6 +209,19 @@ TEST_CASE("Testing get_ghosts"){
     teardown();
 }
 
+TEST_CASE("Testing get_pacman"){
+    setup();
+    int pacmanx,pacmany;
+
+    get_pacman(map,width,height,&pacmanx,&pacmany);
+    CHECK(pacmanx==4);
+    CHECK(pacmany==4);
+
+
+
+    teardown();
+}
+
 
 
 TEST_SUITE_END();

@@ -165,7 +165,7 @@ char * print_map(char* map, int* map_height,int* map_width){
 
 char* load_dots(char* mainMap,int* map_height,int* map_width){
     int mapSize = *map_width * *map_height;
-    char* dotMap = (char*) malloc(mapSize*sizeof(char));
+    char* dotMap = (char*) malloc(mapSize*sizeof(char));//may want to move this outside the function
     for(int i = 0; i< mapSize; i++){
         dotMap[i] = ((mainMap[i]==DOT))?DOT:EMPTY;
     }
@@ -183,5 +183,22 @@ int get_ghosts(char* map,int width, int height, int ghosts_x[NUM_GHOSTS],int gho
             ghostsFound++;
         }
     }
-
+    if (ghostsFound==0){
+        return ERR_NO_GHOSTS;
+    }
+    return NO_ERROR;
 }
+
+int get_pacman(char* map,int width, int height,int* pacman_x, int*pacman_y){
+    for(int i =0; i<width*height;i++){
+        if(map[i]==PACMAN){
+            int x = i%width;
+            int y = (i-x)/width;
+            *pacman_x = x;
+            *pacman_y = y;
+            return NO_ERROR;
+        }
+    }
+    return ERR_NO_PACMAN;
+}
+
