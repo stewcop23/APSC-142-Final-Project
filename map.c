@@ -141,6 +141,7 @@ char * load_map(char *filename, int *map_height, int *map_width) {
 char * print_map(char* mainMap, int* map_height,int* map_width){
 
     //print the top line of walls (excluding the last one because of weird spacing things)
+    change_text_colour(BLUE);
     for(int i = 0; i< *map_width+1;i++){
         printf("W ");
     }
@@ -148,12 +149,29 @@ char * print_map(char* mainMap, int* map_height,int* map_width){
 
     // loop through every row
     for(int row=0; row<*map_height; row++){
-        // at the start of every row there is a wall
+        // at the start of every row there is a wall (color will already be blue)
         printf("W ");
         for(int column=0; column< *map_width;column++){
-            printf("%c ",mainMap[row* *map_width+column]);
+            char currentTile = mainMap[row * *map_width + column];
+            switch (currentTile) {
+                case PACMAN:
+                    change_text_colour(YELLOW);
+                    break;
+                case DOT:
+                    change_text_colour(WHITE);
+                    break;
+                case GHOST:
+                    change_text_colour(PINK);
+                    break;
+                default://should just be walls and spaces
+                    change_text_colour(BLUE);
+                    break;
+            }
+
+            printf("%c ",currentTile);
         }
         //at the end of every row there's a wall and a newline
+        change_text_colour(BLUE);
         printf("W\n");
     }
     //print the bottom line of walls
