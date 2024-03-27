@@ -222,8 +222,6 @@ TEST_CASE("Testing get_pacman"){
     teardown();
 }
 
-
-
 TEST_SUITE_END();
 
 /* tests for ghost.c */
@@ -289,6 +287,7 @@ TEST_CASE("Testing check_win"){
     teardown();
 }
 
+// test for check_loss
 TEST_CASE("Testing check_loss"){
     setup();
 
@@ -307,6 +306,6 @@ TEST_CASE("Testing check_loss"){
 
     teardown();
 }
-// test for check_loss
+
 
 TEST_SUITE_END();

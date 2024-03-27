@@ -50,7 +50,7 @@ int main(void) {
      * load map (Y)
      * load dots (Y)
      * get ghost locations (Y)
-     * get pacman locations
+     * get pacman locations (Y)
      */
 
 

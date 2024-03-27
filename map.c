@@ -116,6 +116,8 @@ char * load_map(char *filename, int *map_height, int *map_width) {
             }else{
                 return NULL;
             }
+
+
             currentChar = getc(pFile);// we're allowed to assume 2 spaces after every character, unless the next character is a new line or the end of the file
             if(currentChar == '\n'){
                 *map_width = width; // update the map width storage variable
@@ -136,7 +138,7 @@ char * load_map(char *filename, int *map_height, int *map_width) {
     return NULL;
 }
 
-char * print_map(char* map, int* map_height,int* map_width){
+char * print_map(char* mainMap, int* map_height,int* map_width){
 
     //print the top line of walls (excluding the last one because of weird spacing things)
     for(int i = 0; i< *map_width+1;i++){
@@ -149,7 +151,7 @@ char * print_map(char* map, int* map_height,int* map_width){
         // at the start of every row there is a wall
         printf("W ");
         for(int column=0; column< *map_width;column++){
-            printf("%c ",map[row* *map_width+column]);
+            printf("%c ",mainMap[row* *map_width+column]);
         }
         //at the end of every row there's a wall and a newline
         printf("W\n");
@@ -164,6 +166,9 @@ char * print_map(char* map, int* map_height,int* map_width){
 }
 
 char* load_dots(char* mainMap,int* map_height,int* map_width){
+    if (mainMap==NULL){
+        return NULL;
+    }
     int mapSize = *map_width * *map_height;
     char* dotMap = (char*) malloc(mapSize*sizeof(char));//may want to move this outside the function
     for(int i = 0; i< mapSize; i++){
@@ -172,10 +177,13 @@ char* load_dots(char* mainMap,int* map_height,int* map_width){
     return dotMap;
 }
 
-int get_ghosts(char* map,int width, int height, int ghosts_x[NUM_GHOSTS],int ghosts_y[NUM_GHOSTS]){
+int get_ghosts(char* mainMap, int width, int height, int ghosts_x[NUM_GHOSTS], int ghosts_y[NUM_GHOSTS]){
+    if (mainMap==NULL){
+        return ERR_NO_MAP;
+    }
     int ghostsFound =0;
     for(int i = 0; i< width*height;i++){
-        if(map[i]==GHOST){
+        if(mainMap[i] == GHOST){
             int x = i%width;
             int y = (i-x)/width;
             ghosts_x[ghostsFound] = x;
