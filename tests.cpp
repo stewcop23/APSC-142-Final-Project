@@ -80,6 +80,7 @@ TEST_CASE("testing print_map") {
     int testHeight = 3;
 
     print_map(testMap, &testHeight, &testWidth);
+    testMap=NULL;
 }
 
 TEST_CASE("Testing is_wall"){
@@ -192,6 +193,37 @@ TEST_CASE("Testing move_actor"){
 
     teardown();
 }
+
+TEST_CASE("Test that ghosts can move through each other") {
+    //set up a custom map that will allow testing of the ghosts ability to pass through each other
+    char* maptest = (char*)malloc(3*sizeof(char));
+
+    maptest[0] = ' ';
+    maptest[1]='G';
+    maptest[2]='G';
+    width = 3;
+    height = 1;
+    int ghostX[2] = {1,2};
+    int ghostY[2] = {0,0};
+
+    map = maptest;
+    dot_map = (char*)malloc(3*sizeof(char));
+    for (int i = 0; i< 3;i++){
+        dot_map[i] =' ';
+    }
+
+    print_map(maptest,&height,&width);
+
+    move_actor(&ghostY[1],&ghostX[1],LEFT,REPLACE_DOTS);
+
+    print_map(map,&height,&width);
+    move_actor(&ghostY[1],&ghostX[1],LEFT,REPLACE_DOTS);
+    print_map(map,&height,&width);
+    CHECK(map[0]==GHOST);
+    CHECK(map[1]==GHOST);
+
+}
+
 
 TEST_CASE("Testing get_ghosts"){
     setup();
