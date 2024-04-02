@@ -15,7 +15,7 @@
  * then it should return KEEP_GOING.  The function can assume
  * that the global map and width/height are valid.
  */
-int check_win(void);
+int check_win(int pacman_y, int pacman_x, int ghosts_y[NUM_GHOSTS], int ghosts_x[NUM_GHOSTS]);
 
 #define YOU_LOSE 1
 /**

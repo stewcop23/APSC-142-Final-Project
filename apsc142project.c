@@ -100,11 +100,12 @@ int main(void) {
         move_actor(&pacmanY,&pacmanX,input,EAT_DOTS);
 
 
-    for (int i =0;i<NUM_GHOSTS;i++){//for each ghosts
+    for (int i =0;i<NUM_GHOSTS;i++){//loop through all ghosts
         char seenDirection = sees_pacman(pacmanY, pacmanX, ghostY[i], ghostX[i]);//store the direction the ghost sees pacman...
-        if(seenDirection == SEES_NOTHING) {// if it doesn't, pick a random direction...
+        if(seenDirection == SEES_NOTHING) {// if the ghost doesn't see pacman,it picks a random direction...
             int ghostDirection = rand() % 4;
 
+            //move the ghost in the randomly chosen direction
             if (ghostDirection==0){
                 move_actor(&ghostY[i], &ghostX[i], UP, REPLACE_DOTS);
             }
@@ -130,14 +131,11 @@ int main(void) {
 
 
     print_map(map,&width,&height);
-    if(check_win()==YOU_WIN){
+    if(check_win(pacmanY,pacmanX,ghostY, ghostX)==YOU_WIN){
         printf("Congratulations! You win!\n");
         return 0;
     }
 
-
-
-//        return 0;
     }
 
     return NO_ERROR;

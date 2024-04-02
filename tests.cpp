@@ -243,11 +243,11 @@ TEST_CASE("Testing get_ghosts"){
 
 TEST_CASE("Testing get_pacman"){
     setup();
-    int pacmanx,pacmany;
+    int pacmanX,pacmanY;
 
-    get_pacman(map,width,height,&pacmanx,&pacmany);
-    CHECK(pacmanx==4);
-    CHECK(pacmany==4);
+    get_pacman(map,width,height,&pacmanX,&pacmanY);
+    CHECK(pacmanX==4);
+    CHECK(pacmanY==4);
 
 
 
@@ -323,18 +323,18 @@ TEST_CASE("Testing check_win"){
 TEST_CASE("Testing check_loss"){
     setup();
 
-    int pacman_x = 0;
-    int pacman_y = 0;
+    int pacmanX = 0;
+    int pacmanY = 0;
 
     //ghosts not touching pacman
-    int ghost_x[NUM_GHOSTS] = {1,0};
-    int ghost_y[NUM_GHOSTS] = {0,1};
-    CHECK(check_loss(pacman_y,pacman_x,ghost_y,ghost_x)==KEEP_GOING);
+    int ghostX[NUM_GHOSTS] = {1,0};
+    int ghostY[NUM_GHOSTS] = {0,1};
+    CHECK(check_loss(pacmanY,pacmanX,ghostY,ghostX)==KEEP_GOING);
 
 // now the first ghost is on top of pacman
-    ghost_x[0] = 0;
-    ghost_y[0] = 0;
-    CHECK(check_loss(pacman_y,pacman_x,ghost_y,ghost_x)==YOU_LOSE);
+    ghostX[0] = 0;
+    ghostY[0] = 0;
+    CHECK(check_loss(pacmanY,pacmanX,ghostY,ghostX)==YOU_LOSE);
 
     teardown();
 }

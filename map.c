@@ -145,6 +145,7 @@ char * print_map(char* mainMap, int* map_height,int* map_width){
     for(int i = 0; i< *map_width+1;i++){
         printf("W ");
     }
+
     printf("W\n");
 
     // loop through every row
@@ -196,13 +197,16 @@ char* load_dots(char* mainMap,int* map_height,int* map_width){
 }
 
 int get_ghosts(char* mainMap, int width, int height, int ghosts_x[NUM_GHOSTS], int ghosts_y[NUM_GHOSTS]){
+    //check if map is loaded properly
     if (mainMap==NULL){
         return ERR_NO_MAP;
     }
-    int ghostsFound =0;
+
+    int ghostsFound = 0;
+    //loop through every char in the map array
     for(int i = 0; i< width*height;i++){
         if(mainMap[i] == GHOST){
-            int x = i%width;
+            int x = i%width; //calculate the x value based on the current index of the map
             int y = (i-x)/width;
             ghosts_x[ghostsFound] = x;
             ghosts_y[ghostsFound] = y;

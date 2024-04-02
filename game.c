@@ -8,7 +8,7 @@ extern char * map, * dot_map;
 extern int height;
 extern int width;
 
-int check_win(void) {
+int check_win(int pacman_y, int pacman_x, int ghosts_y[NUM_GHOSTS], int ghosts_x[NUM_GHOSTS]) {
 
  //loop through all dots, if there are any remaining the game is not over,
  // if all dots are eaten then the loop will fully complete, and YOU_WIN will be returned
