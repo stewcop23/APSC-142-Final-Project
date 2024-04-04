@@ -14,8 +14,13 @@
  * If no dots remain, then it should return YOU_WIN.  If not,
  * then it should return KEEP_GOING.  The function can assume
  * that the global map and width/height are valid.
+ * @param pacman_y The Y coordinate of pacman
+ * @param pacman_x The X coordinate of pacman
+ * @param ghosts_y An array of Y coordinates of ghosts
+ * @param ghosts_x An array of X coordinates of ghosts
+ * @return YOU_WIN if no dots remain, otherwise KEEP_GOING
  */
-int check_win(void);
+int check_win(int pacman_y, int pacman_x, int ghosts_y[NUM_GHOSTS], int ghosts_x[NUM_GHOSTS]);
 
 #define YOU_LOSE 1
 /**
