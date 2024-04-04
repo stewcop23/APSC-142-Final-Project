@@ -2,7 +2,7 @@
 // Copyright Sean Kauffman 2024
 
 #include <stdlib.h>
-#include <stdio.h>
+#include <stdio.h> //error?
 
 #include "defines.h"
 #include "colours.h"
@@ -82,7 +82,7 @@ int is_wall(int y, int x) {
     return NOT_WALL;
 }
 
-char * load_map(char *filename, int *map_height, int *map_width) {
+char * load_map(char * filename, int *map_height, int *map_width) {
     FILE *pFile = NULL;
     pFile = fopen(filename,"r");
     int map_size = 0;//stores how many chars are in the map
@@ -137,6 +137,7 @@ char * load_map(char *filename, int *map_height, int *map_width) {
 
     return NULL;
 }
+
 
 char * print_map(char* mainMap, int* map_height,int* map_width){
 
@@ -227,4 +228,3 @@ int get_pacman(char* map,int width, int height,int* pacman_x, int*pacman_y){
     }
     return ERR_NO_PACMAN;
 }
-

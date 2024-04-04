@@ -42,10 +42,6 @@
  */
 char * load_map(char * filename, int * map_height, int *map_width);
 
-char* load_dots(char* mainMap,int* map_height,int* map_width);
-
-char * print_map(char* map, int* map_height,int* map_width);
-
 #define NOT_WALL 0
 #define YES_WALL 1
 /**
@@ -98,10 +94,14 @@ int is_wall(int y, int x);
 int move_actor(int * y, int * x, char direction, int eat_dots);
 
 /** Other function prototypes can go below here **/
-
 int get_ghosts(char* mainMap, int width, int height, int ghosts_x[NUM_GHOSTS], int ghosts_y[NUM_GHOSTS]);
 
 int get_pacman(char* map,int width, int height,int* pacman_x, int*pacman_y);
+
+char* load_dots(char* mainMap,int* map_height,int* map_width);
+
+char * print_map(char* map, int* map_height,int* map_width);
+
 
 
 #endif //PROJECT_MAP_H

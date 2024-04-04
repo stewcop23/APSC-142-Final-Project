@@ -3,7 +3,7 @@
 
 #include "defines.h"
 #include "ghost.h"
-#include "map.h"
+#include "map.h" // error?
 
 char sees_pacman(int pacman_y, int pacman_x, int ghost_y, int ghost_x) {
     //check if pacman and ghost are in the same column
