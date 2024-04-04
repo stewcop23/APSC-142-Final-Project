@@ -25,8 +25,8 @@ int width, height;
  */
 
 void setup(void) {
-    map = load_map(MAP_NAME, &width, &height);
-    dot_map = load_dots(map,&width, &height);
+    map = load_map(MAP_NAME, &height, &width);
+    dot_map = load_dots(map,&height, &width);
 
 }
 
@@ -60,7 +60,7 @@ TEST_CASE("A test for load_map") {
 
 TEST_CASE("Testing load_dots"){
     setup();
-    dot_map = load_dots(map,&width,&height);
+    dot_map = load_dots(map,&height,&width);
 
     CHECK(dot_map[0]==EMPTY);//confirms that map has loaded correctly and that ghosts are ignored
     CHECK(dot_map[1]==DOT);//confirms that dots are being tracked correctly
