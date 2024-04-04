@@ -75,7 +75,7 @@ int move_actor(int * y, int * x, char direction, int eat_dots) {
 }
 
 int is_wall(int y, int x) {
-    if(map[(y*width) +x] == WALL || y < 0 || x < 0 || y >= width || x >= width){
+    if(map[(y*width) +x] == WALL || y < 0 || x < 0 || y >= height || x >= width){
         return YES_WALL;
     }
 
