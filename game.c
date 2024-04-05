@@ -21,11 +21,12 @@ int check_win(int pacman_y, int pacman_x, int ghosts_y[NUM_GHOSTS], int ghosts_x
 }
 
 int check_loss(int pacman_y, int pacman_x, int ghosts_y[NUM_GHOSTS], int ghosts_x[NUM_GHOSTS]) {
-    for (int i = 0; i<NUM_GHOSTS;i++){
-        if (ghosts_y[i]==pacman_y && ghosts_x[i]==pacman_x){
+    for (int i = 0; i<NUM_GHOSTS;i++){//loop through all ghosts
+        if (ghosts_y[i]==pacman_y && ghosts_x[i]==pacman_x){// if that ghost shares the same position as pacman, end the game
             return YOU_LOSE;
         }
     }
+    // if it reaches this point, none of the ghosts are on top of pacman, and the game can continue.
     return KEEP_GOING;
 }
 

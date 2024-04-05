@@ -15,6 +15,8 @@ int move_actor(int * y, int * x, char direction, int eat_dots) {
     int changeInX = 0;
     int changeInY = 0;
 
+    // While switch/case statements haven't been taught in this course, we are both taught them in high school and in different languages.
+    // Additionally, using a switch statement is far more elegant and efficient than using many if/else statements.
     switch (direction){
         case UP:
             //check if there is a wall above it
@@ -108,7 +110,7 @@ char * load_map(char * filename, int *map_height, int *map_width) {
             *(map + map_size) = currentChar;// map should already have 1 empty index, this is where the latest char is placed
 
             // dynamically reallocate memory.
-            char* tempMap = realloc(map,(++map_size+1)*sizeof(char)); //map size needs to be incremented, and the +1 is because we want the new array to be larger than the map size to accommodate the next char.
+            char* tempMap = realloc(map, (++map_size + 1) * sizeof(char)); //map size needs to be incremented, and the +1 is because we want the new array to be larger than the map size to accommodate the next char.
 
             if (tempMap != NULL){//if memory is allocated properly...
                 //swap the tempMap and Map variables
@@ -130,6 +132,9 @@ char * load_map(char * filename, int *map_height, int *map_width) {
             else if (currentChar == EOF){
                 *map_width = width;
                 *map_height = map_size / (*map_width);
+                fclose(pFile);
+                pFile = NULL;
+                free(tempMap);
                 return map;
             }
 
@@ -150,10 +155,13 @@ char * print_map(char* mainMap, int* map_height,int* map_width){
 
     // loop through every row
     for(int row=0; row<*map_height; row++){
-        // at the start of every row there is a wall (color will already be blue)
+        //at the start of every row there is a wall (color will already be blue)
         printf("W ");
         for(int column=0; column< *map_width;column++){
             char currentTile = mainMap[row * *map_width + column];
+
+            // While switch/case statements haven't been taught in this course, we are both taught them in high school and in different languages.
+            // Additionally, using a switch statement is far more elegant and efficient than using many if/else statements.
             switch (currentTile) {
                 case PACMAN:
                     change_text_colour(YELLOW);
@@ -199,6 +207,7 @@ char* load_dots(char* mainMap,int* map_height,int* map_width){
     for(int i = 0; i< mapSize; i++){
         dotMap[i] = ((mainMap[i]==DOT))?DOT:EMPTY;
     }
+
     return dotMap;
 }
 
@@ -218,6 +227,8 @@ int get_ghosts(char* mainMap, int width, int height, int ghosts_x[NUM_GHOSTS], i
             //update the ghost coordinate arrays
             ghosts_x[ghostsFound] = x;
             ghosts_y[ghostsFound] = y;
+
+            //increment the number of ghosts that have been found.
             ghostsFound++;
         }
     }
