@@ -43,7 +43,7 @@ int ghostX[NUM_GHOSTS], ghostY[NUM_GHOSTS];
 int main(void) {
     setbuf(stdout, NULL);
 //Load the map
-    map = load_map(MAP_NAME,&width,&height);
+    map = load_map(MAP_NAME,&height,&width);
     if (map == NULL){
         return ERR_NO_MAP;
     }
@@ -63,12 +63,18 @@ int main(void) {
     }
 
     //print the starting map
-    print_map(map,&width,&height);
+    print_map(map,&height,&width);
     while(1){
         char input = getch();
+
         // move the pacman in the direction pressed
         move_actor(&pacmanY,&pacmanX,input,EAT_DOTS);
 
+        if(check_loss(pacmanY,pacmanX,ghostY,ghostX)==YOU_LOSE){
+            print_map(map,&height,&width);
+            printf("Sorry, you lose.\n");
+            return 0;
+        }
 
         for (int i =0;i<NUM_GHOSTS;i++){//for each ghosts
             char seenDirection = sees_pacman(pacmanY, pacmanX, ghostY[i], ghostX[i]);//store the direction the ghost sees pacman...
@@ -90,8 +96,10 @@ int main(void) {
             }else{//if the ghost does see pacman, move in that direction
                 move_actor(&ghostY[i], &ghostX[i], seenDirection, REPLACE_DOTS);
             }
-
         }
+
+        print_map(map,&height,&width);
+
 
         if(check_loss(pacmanY,pacmanX,ghostY,ghostX)==YOU_LOSE){
             printf("Sorry, you lose.\n");
@@ -99,7 +107,7 @@ int main(void) {
         }
 
 
-        print_map(map,&width,&height);
+
         if(check_win(pacmanY, pacmanX, ghostY, ghostX)==YOU_WIN){
             printf("Congratulations! You win!\n");
             return 0;
