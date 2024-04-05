@@ -45,6 +45,8 @@ int main(void) {
 //Load the map
     map = load_map(MAP_NAME,&height,&width);
     if (map == NULL){
+        free(map);// shouldn't be necessary, but removes the possibility of a memory leak.
+
         return ERR_NO_MAP;
     }
     // process the map to create the dot map
@@ -53,12 +55,22 @@ int main(void) {
     //process the map to get the pacman (and process any errors)
     int pacError = get_pacman(map,width,height,&pacmanX,&pacmanY);
     if(pacError==ERR_NO_PACMAN){
+        // if an error occurs, free and nullify all pointers before ending the program
+        free(map);
+        free(dot_map);
+        map = NULL;
+        dot_map = NULL;
         return ERR_NO_PACMAN;
     }
 
     //process the map to get all ghosts (and output any errors)
     int ghostError = get_ghosts(map,width,height,ghostX,ghostY);
     if (ghostError==ERR_NO_GHOSTS){
+        // if an error occurs, free and nullify all pointers before ending the program
+        free(map);
+        free(dot_map);
+        map = NULL;
+        dot_map = NULL;
         return ERR_NO_GHOSTS;
     }
 
@@ -73,6 +85,11 @@ int main(void) {
         if(check_loss(pacmanY,pacmanX,ghostY,ghostX)==YOU_LOSE){
             print_map(map,&height,&width);
             printf("Sorry, you lose.\n");
+            // if the game is lost, free and nullify all pointers before ending the program
+            free(map);
+            free(dot_map);
+            map = NULL;
+            dot_map = NULL;
             return 0;
         }
 
@@ -103,6 +120,11 @@ int main(void) {
 
         if(check_loss(pacmanY,pacmanX,ghostY,ghostX)==YOU_LOSE){
             printf("Sorry, you lose.\n");
+            // if the game is lost, free and nullify all pointers before ending the program
+            free(map);
+            free(dot_map);
+            map = NULL;
+            dot_map = NULL;
             return 0;
         }
 
@@ -110,11 +132,12 @@ int main(void) {
 
         if(check_win(pacmanY, pacmanX, ghostY, ghostX)==YOU_WIN){
             printf("Congratulations! You win!\n");
+            // if the game is won, free and nullify all pointers before ending the program
+            free(map);
+            free(dot_map);
+            map = NULL;
+            dot_map = NULL;
             return 0;
         }
-
-
-
-//        return 0;
     }
 }

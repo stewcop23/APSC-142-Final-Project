@@ -52,7 +52,8 @@ TEST_CASE("A test for load_map") {
 
     //confirm width and height are set properly
     CHECK(width == 9);
-    CHECK(height == 9);
+
+  CHECK(height == 9);
 
     //include tests to see if pacman loaded into the right spot
     teardown();
@@ -64,7 +65,7 @@ TEST_CASE("Testing load_dots"){
 
     CHECK(dot_map[0]==EMPTY);//confirms that map has loaded correctly and that ghosts are ignored
     CHECK(dot_map[1]==DOT);//confirms that dots are being tracked correctly
-    CHECK(dot_map[4]==EMPTY);// confirm that walls are being kept blank
+    CHECK(dot_map[4]==EMPTY);//confirm that walls are being kept blank
     CHECK(dot_map[40]==EMPTY);//confirms that pacman is read as empty.
 
     teardown();
